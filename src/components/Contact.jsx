@@ -61,6 +61,13 @@ export default function Contact() {
         })}
       </div>
 
+      <form className="contact-form" onSubmit={(e) => e.preventDefault()}>
+        <input type="text" placeholder="Your Name" className="form-input" required />
+        <input type="email" placeholder="Your Email" className="form-input" required />
+        <textarea placeholder="Your Message" rows="5" className="form-input" required></textarea>
+        <button type="submit" className="form-btn">Send Message</button>
+      </form>
+
       <style>
         {`
           #contact{
@@ -156,6 +163,53 @@ export default function Contact() {
               min-height: 150px;
               padding: 20px 14px;
             }
+          }
+
+          .contact-form {
+            max-width: 600px;
+            margin: 40px auto 0;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+          }
+
+          .form-input {
+            width: 100%;
+            padding: 16px 20px;
+            border-radius: 14px;
+            border: 1px solid var(--border);
+            background: var(--card);
+            backdrop-filter: blur(10px); 
+            color: var(--text);
+            font-size: 15px;
+            font-family: inherit;
+            transition: all 0.2s ease;
+            resize: vertical;
+          }
+          
+          .form-input:focus {
+            outline: none;
+            border-color: var(--accent);
+            background: var(--bg-soft);
+            box-shadow: 0 0 0 4px rgba(147, 51, 234, 0.1);
+          }
+
+          .form-btn {
+            padding: 16px;
+            border-radius: 14px;
+            background: linear-gradient(135deg, var(--accent), var(--accent-strong));
+            color: white;
+            border: none;
+            font-weight: 700;
+            font-size: 16px;
+            cursor: pointer;
+            box-shadow: 0 10px 30px -5px rgba(147, 51, 234, 0.4);
+            transition: transform 0.2s, box-shadow 0.2s;
+          }
+
+          .form-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 20px 40px -5px rgba(219, 39, 119, 0.5);
           }
         `}
       </style>

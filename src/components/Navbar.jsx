@@ -7,7 +7,7 @@ const navItems = [
   { label: "Home", to: "home" },
   { label: "About", to: "about" },
 
-  
+
   { label: "Education", to: "education" },
 
   { label: "Skills", to: "skills" },
@@ -29,7 +29,7 @@ export default function Navbar() {
     document.documentElement.setAttribute("data-theme", initial);
   }, []);
 
-  
+
   useEffect(() => {
     const handleResize = () => {
       if (window.innerWidth > 900) {
@@ -40,7 +40,7 @@ export default function Navbar() {
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
- 
+
   useEffect(() => {
     if (menuOpen) {
       document.body.style.overflow = "hidden";
@@ -59,26 +59,26 @@ export default function Navbar() {
     localStorage.setItem("theme", next);
   };
 
-  
+
+  /* Navbar colors matching new Premium Theme */
   const navBg =
     theme === "dark"
-      ? "linear-gradient(to right, rgba(15,23,42,0.97), rgba(15,23,42,0.90))"
-      : "linear-gradient(to right, rgba(255,255,255,0.92), rgba(255,255,255,0.86))";
+      ? "rgba(3, 0, 20, 0.85)"
+      : "rgba(255, 255, 255, 0.85)";
 
   const navBorder =
     theme === "dark"
-      ? "1px solid rgba(148,163,184,0.25)"
-      : "1px solid rgba(15,23,42,0.10)";
+      ? "1px solid rgba(147, 51, 234, 0.2)"
+      : "1px solid rgba(124, 58, 237, 0.1)";
 
-  const titleColor = theme === "dark" ? "#ffffff" : "#0f172a";
-  const subtitleColor = theme === "dark" ? "#9ca3af" : "#475569";
-  const linkColor = theme === "dark" ? "#e5e7eb" : "#0f172a";
+  const titleColor = theme === "dark" ? "#f8fafc" : "#0f172a";
+  const subtitleColor = theme === "dark" ? "#94a3b8" : "#64748b";
+  const linkColor = theme === "dark" ? "#e2e8f0" : "#1e293b";
 
-  
   const burgerBorder =
     theme === "dark"
-      ? "1px solid rgba(255,255,255,0.16)"
-      : "1px solid rgba(15,23,42,0.14)";
+      ? "1px solid rgba(147, 51, 234, 0.3)"
+      : "1px solid rgba(124, 58, 237, 0.2)";
 
   return (
     <motion.nav
@@ -86,8 +86,10 @@ export default function Navbar() {
       animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 0.6 }}
       style={{
-        position: "sticky",
+        position: "fixed",
         top: 0,
+        left: 0,
+        right: 0,
         zIndex: 999,
         width: "100%",
         backdropFilter: "blur(18px)",
@@ -95,7 +97,7 @@ export default function Navbar() {
         borderBottom: navBorder
       }}
     >
-      {}
+      { }
       <div
         style={{
           maxWidth: 1200,
@@ -108,7 +110,7 @@ export default function Navbar() {
           width: "100%"
         }}
       >
-        {}
+        { }
         <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
           <img
             src={ProfileImage}
@@ -118,7 +120,7 @@ export default function Navbar() {
               height: 42,
               borderRadius: "999px",
               objectFit: "cover",
-              border: "2px solid rgba(34, 197, 94, 0.9)", 
+              border: "2px solid rgba(34, 197, 94, 0.9)",
               boxShadow: "0 6px 18px rgba(0,0,0,0.18)",
               flexShrink: 0
             }}
@@ -134,7 +136,7 @@ export default function Navbar() {
           </div>
         </div>
 
-        {}
+        { }
         <div
           className="navbar-desktop"
           style={{
@@ -188,29 +190,50 @@ export default function Navbar() {
           </button>
         </div>
 
-        {}
-        <button
-          onClick={() => setMenuOpen((s) => !s)}
-          className="navbar-burger"
-          aria-label="Toggle menu"
-          style={{
-            display: "none",
-            padding: "10px 12px",
-            borderRadius: 12,
-            background: theme === "dark" ? "rgba(2,6,23,0.35)" : "rgba(255,255,255,0.72)",
-            border: burgerBorder,
-            cursor: "pointer",
-            color: titleColor,
-            fontWeight: 800,
-            lineHeight: 1,
-            minWidth: 44
-          }}
-        >
-          {menuOpen ? "✕" : "☰"}
-        </button>
+        { }
+        <div className="mobile-controls">
+          <button
+            onClick={toggleTheme}
+            style={{
+              padding: "8px 12px",
+              fontSize: 12,
+              borderRadius: 999,
+              border:
+                theme === "dark"
+                  ? "1px solid rgba(255,255,255,0.18)"
+                  : "1px solid rgba(0,0,0,0.12)",
+              color: titleColor,
+              background: "transparent",
+              fontWeight: 600,
+              cursor: "pointer",
+              whiteSpace: "nowrap"
+            }}
+          >
+            {theme === "dark" ? "Light" : "Dark"}
+          </button>
+
+          <button
+            onClick={() => setMenuOpen((s) => !s)}
+            className="navbar-burger"
+            aria-label="Toggle menu"
+            style={{
+              padding: "10px 12px",
+              borderRadius: 12,
+              background: theme === "dark" ? "rgba(2,6,23,0.35)" : "rgba(255,255,255,0.72)",
+              border: burgerBorder,
+              cursor: "pointer",
+              color: titleColor,
+              fontWeight: 800,
+              lineHeight: 1,
+              minWidth: 44
+            }}
+          >
+            {menuOpen ? "✕" : "☰"}
+          </button>
+        </div>
       </div>
 
-      {}
+      { }
       {menuOpen && (
         <div
           className="navbar-mobile"
@@ -290,17 +313,21 @@ export default function Navbar() {
         </div>
       )}
 
-      {}
+      { }
       <style>
         {`
+          .mobile-controls {
+            display: none !important;
+          }
+
           @media (max-width: 900px) {
             .navbar-desktop {
               display: none !important;
             }
-            .navbar-burger {
-              display: inline-flex !important;
+            .mobile-controls {
+              display: flex !important;
               align-items: center;
-              justify-content: center;
+              gap: 12px;
             }
           }
         `}

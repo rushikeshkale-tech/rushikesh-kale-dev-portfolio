@@ -1,157 +1,177 @@
 :root {
-  /* ✅ DARK THEME (Purple + Pink Premium Neon) */
-  --bg: #050016;
-  --bg-soft: #0b0226;
-  --accent: #a855f7;         /* purple */
-  --accent-strong: #ec4899;  /* pink */
-  --text: #f1f5f9;
-  --muted: #a3a3c2;
-  --card: #0b0226;
-  --border: rgba(168, 85, 247, 0.28);
-  --danger: #fb7185;
-  --radius: 18px;
-  --shadow-soft: 0 26px 70px rgba(5, 0, 22, 0.85);
+  /* ✅ DARK THEME (Premium Deep Space) */
+  --bg: #030014;
+  --bg-soft: #0a0428;
+  --accent: #9333ea;
+  /* Rich Purple */
+  --accent-strong: #db2777;
+  /* Deep Pink */
+  --text: #f8fafc;
+  --muted: #94a3b8;
+  --card: rgba(15, 23, 42, 0.6);
+  --border: rgba(147, 51, 234, 0.35);
+  /* More visible accent border */
+  --danger: #f43f5e;
+  --radius: 20px;
+  --shadow-soft: 0 10px 40px -10px rgba(0, 0, 0, 0.5);
+  --glass: blur(20px) saturate(180%);
 }
 
-/* ✅ LIGHT THEME override */
+/* ✅ LIGHT THEME (Clean Professional) */
 html[data-theme='light'] {
-  --bg: #faf7ff;
-  --bg-soft: #f3e8ff;
-  --accent: #7c3aed;        /* purple */
-  --accent-strong: #db2777; /* pink */
-  --text: #12001f;
-  --muted: #6b7280;
-  --card: #ffffff;
-  --border: rgba(124, 58, 237, 0.22);
-  --danger: #be123c;
-  --shadow-soft: 0 18px 50px rgba(124, 58, 237, 0.18);
+  --bg: #ffffff;
+  --bg-soft: #f8fafc;
+  --accent: #7c3aed;
+  /* Bright Purple */
+  --accent-strong: #d946ef;
+  /* Bright Pink */
+  --text: #0f172a;
+  --muted: #64748b;
+  --card: rgba(255, 255, 255, 0.75);
+  --border: rgba(124, 58, 237, 0.15);
+  --danger: #e11d48;
+  --shadow-soft: 0 10px 40px -10px rgba(124, 58, 237, 0.12);
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  /* Slightly thinner for elegance */
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg);
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(var(--bg), var(--accent), var(--bg));
+  border-radius: 99px;
+  border: 2px solid var(--bg);
 }
 
 /* Reset / base */
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 85px;
+  /* Ensures anchor links land below navbar */
+}
 
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  scroll-behavior: smooth;
 }
 
 body {
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Inter', sans-serif;
-
-  /* ✅ variable based background for better light/dark */
-  background: radial-gradient(circle at top, var(--bg-soft) 0, var(--bg) 55%, #000 100%);
-
+  font-family: 'Outfit', system-ui, -apple-system, sans-serif;
+  background-color: var(--bg);
+  background-image:
+    radial-gradient(circle at 15% 50%, rgba(147, 51, 234, 0.12), transparent 25%),
+    radial-gradient(circle at 85% 30%, rgba(219, 39, 119, 0.12), transparent 25%);
   color: var(--text);
   font-size: 16px;
   min-height: 100vh;
-}
-
-/* ✅ Light theme body background improved */
-html[data-theme='light'] body {
-  background: radial-gradient(circle at top, #ffffff 0, var(--bg) 60%, #eaeefc 100%);
+  overflow-x: hidden;
 }
 
 /* Root layout */
 
 #root {
   min-height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
 
 .app {
-  min-height: 100vh;
-  padding: 0 4%;
-  background:
-    radial-gradient(circle at 0 0, rgba(168, 85, 247, 0.12) 0, transparent 55%),
-    radial-gradient(circle at 100% 100%, rgba(236, 72, 153, 0.14) 0, transparent 55%);
+  width: 100%;
+  max-width: 100vw;
+  /* overflow: hidden;  <-- REMOVED: Breaks sticky navbar */
+  overflow-x: hidden;
+  /* Only hide horizontal overflow */
+  position: relative;
+  padding-top: 80px;
+  /* ✅ Compensate for fixed navbar */
 }
 
-/* Sections use more width, not tiny middle */
+/* Add a global noise texture for premium fell (optional, keeping it clean for now) */
+
+/* Sections */
 
 section {
-  padding: 50px 0;
+  padding: 30px 0;
+  /* Reduced even more per request */
   max-width: 1200px;
   margin: 0 auto;
-}
-
-/* ✅ FIX: Home section ke top me extra gap remove */
-.section-home {
-  padding-top: 50px !important;
-  padding-bottom: 60px !important;
+  padding-left: 20px;
+  padding-right: 20px;
 }
 
 /* Typography helpers */
 
 .section-title {
-  font-size: 34px;
+  font-size: 42px;
   font-weight: 800;
-  margin-bottom: 12px;
+  margin-bottom: 20px;
+  background: linear-gradient(to right, var(--text), var(--muted));
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  line-height: 1.2;
 }
 
 .section-subtitle {
-  font-size: 15px;
-  color: var(--muted);
+  font-size: 14px;
+  color: var(--accent);
   text-transform: uppercase;
-  letter-spacing: 0.16em;
-  margin-bottom: 32px;
+  letter-spacing: 0.2em;
+  font-weight: 700;
+  margin-bottom: 16px;
+  display: inline-block;
 }
 
 /* Cards / boxes */
 
 .card {
-  background: linear-gradient(
-    135deg,
-    rgba(11, 2, 38, 0.96),
-    rgba(11, 2, 38, 0.9)
-  );
+  background: var(--card);
+  backdrop-filter: var(--glass);
+  -webkit-backdrop-filter: var(--glass);
   border-radius: var(--radius);
   border: 1px solid var(--border);
   box-shadow: var(--shadow-soft);
-  padding: 28px;
-  backdrop-filter: blur(22px);
+  padding: 32px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s;
 }
 
-/* Light theme card override */
-html[data-theme='light'] .card {
-  background: linear-gradient(135deg, #ffffff, #f3e8ff);
-}
-
-/* Small UI elements */
-
-.badge {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  padding: 6px 14px;
-  border-radius: 999px;
-  border: 1px solid rgba(148, 163, 184, 0.4);
-  color: var(--muted);
-  font-size: 12px;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
+.card:hover {
+  transform: translateY(-5px);
+  border-color: var(--accent);
+  box-shadow: 0 20px 50px -10px rgba(147, 51, 234, 0.3);
 }
 
 /* Buttons */
 
 .btn-primary {
-  background: linear-gradient(135deg, var(--accent-strong), var(--accent));
-  color: #050016;
-  padding: 13px 26px;
+  background: linear-gradient(135deg, var(--accent), var(--accent-strong));
+  color: #fff;
+  /* Always white on primary btn */
+  padding: 14px 32px;
   border-radius: 999px;
   border: none;
-  font-weight: 650;
+  font-weight: 700;
   cursor: pointer;
   display: inline-flex;
   align-items: center;
-  gap: 9px;
-  font-size: 15px;
-  box-shadow: 0 20px 45px rgba(168, 85, 247, 0.35);
-  transition: transform 0.18s ease, box-shadow 0.18s ease;
+  gap: 10px;
+  font-size: 16px;
+  box-shadow: 0 10px 30px -5px rgba(147, 51, 234, 0.5);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .btn-primary:hover {
-  transform: translateY(-2px) scale(1.01);
-  box-shadow: 0 24px 60px rgba(236, 72, 153, 0.45);
+  transform: translateY(-3px) scale(1.02);
+  box-shadow: 0 20px 40px -5px rgba(219, 39, 119, 0.6);
+  filter: brightness(1.1);
 }
 
 .btn-ghost {
@@ -267,7 +287,8 @@ a {
 
 .edu-li-wrap {
   position: relative;
-  max-width: 900px;
+  max-width: 1000px;
+  /* ✅ Increased from 900px */
   margin: 0 auto;
   padding: 26px 0;
 }
@@ -280,13 +301,11 @@ a {
   left: 34px;
   width: 4px;
   border-radius: 999px;
-  background: repeating-linear-gradient(
-    to bottom,
-    rgba(168, 85, 247, 0.65) 0px,
-    rgba(168, 85, 247, 0.65) 10px,
-    transparent 10px,
-    transparent 22px
-  );
+  background: repeating-linear-gradient(to bottom,
+      rgba(168, 85, 247, 0.65) 0px,
+      rgba(168, 85, 247, 0.65) 10px,
+      transparent 10px,
+      transparent 22px);
   opacity: 0.95;
 }
 
@@ -318,8 +337,10 @@ a {
 /* card on right */
 .edu-li-card {
   width: 100%;
-  max-width: 680px;
-  padding: 22px;
+  max-width: 800px;
+  /* ✅ Increased from 680px */
+  padding: 26px;
+  /* Slightly more padding */
 }
 
 .edu-li-title {
@@ -390,11 +411,9 @@ a {
   backdrop-filter: blur(22px);
 
   /* same glass vibe */
-  background: linear-gradient(
-    135deg,
-    rgba(11, 2, 38, 0.96),
-    rgba(11, 2, 38, 0.9)
-  );
+  background: linear-gradient(135deg,
+      rgba(11, 2, 38, 0.96),
+      rgba(11, 2, 38, 0.9));
 }
 
 /* Light theme support */
@@ -459,7 +478,8 @@ html[data-theme='light'] .project-img-wrap {
 
 .project-img {
   width: 100%;
-  height: 210px;
+  height: 250px;
+  /* ✅ Increased from 210px */
   object-fit: cover;
   display: block;
   transform: scale(1);
@@ -489,7 +509,8 @@ html[data-theme='light'] .project-img-wrap {
   }
 
   .project-img {
-    height: 200px;
+    height: 230px;
+    /* ✅ Increased from 200px */
   }
 }
 
@@ -570,16 +591,19 @@ html[data-theme='light'] .project-img-wrap {
 
 
 /* CGPA / Percentage line spacing */
-.edu-li-score{
-  margin-top: 10px;      /* institute ke baad thoda space */
-  margin-bottom: 12px;   /* ✅ chips ko niche push karega */
+.edu-li-score {
+  margin-top: 10px;
+  /* institute ke baad thoda space */
+  margin-bottom: 12px;
+  /* ✅ chips ko niche push karega */
   font-weight: 600;
   color: var(--text);
 }
 
 /* Chips ko thoda niche */
-.edu-li-meta{
-  margin-top: 10px;      /* ✅ CGPA/Percentage ke baad extra gap */
+.edu-li-meta {
+  margin-top: 10px;
+  /* ✅ CGPA/Percentage ke baad extra gap */
   display: flex;
   gap: 10px;
   flex-wrap: wrap;

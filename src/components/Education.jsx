@@ -86,8 +86,8 @@ export default function Education() {
 
           .edu-li-card{
             width: 100%;
-            max-width: 720px;
-            padding: 22px;
+            max-width: 850px; /* ✅ Increased from 720px */
+            padding: 24px;
             overflow: hidden;
           }
 
